@@ -1,0 +1,1096 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 電子帳簿保存法 対応ファイル整理（Googleドライブ保存）
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.6@e2665624a156f52160927bceac9e169bd7e5ae6b936ae82575e14c90af390e6e
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: yoshiki-0428/google_drive:0.1.0@3be894ee7a15878c2c00c3728f901d8d63c56b901b7494c5a2a8fc0649566d52
+    version: null
+kind: app
+version: 0.5.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: iteration
+      id: 1772502443849-source-1772502740789-target
+      source: '1772502443849'
+      sourceHandle: source
+      target: '1772502740789'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        sourceType: iteration-start
+        targetType: document-extractor
+      id: 1772502740789start-source-1772503117574-target
+      source: 1772502740789start
+      sourceHandle: source
+      target: '1772503117574'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        sourceType: document-extractor
+        targetType: parameter-extractor
+      id: 1772503117574-source-1772503678327-target
+      source: '1772503117574'
+      sourceHandle: source
+      target: '1772503678327'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        sourceType: parameter-extractor
+        targetType: code
+      id: 1772503678327-source-1772504194837-target
+      source: '1772503678327'
+      sourceHandle: source
+      target: '1772504194837'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: template-transform
+      id: 1772502740789-source-1772523024222-target
+      source: '1772502740789'
+      sourceHandle: source
+      target: '1772523024222'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1772523024222-source-1772521245321-target
+      source: '1772523024222'
+      sourceHandle: source
+      target: '1772521245321'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1772521245321-source-1772701350979-target
+      source: '1772521245321'
+      sourceHandle: source
+      target: '1772701350979'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1772701350979-source-1772702452513-target
+      source: '1772701350979'
+      sourceHandle: source
+      target: '1772702452513'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1772703076815-true-1772703193887-target
+      source: '1772703076815'
+      sourceHandle: 'true'
+      target: '1772703193887'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1772703076815-false-1772703443110-target
+      source: '1772703076815'
+      sourceHandle: 'false'
+      target: '1772703443110'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1772703193887-source-1772710467551-target
+      source: '1772703193887'
+      sourceHandle: source
+      target: '1772710467551'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: template-transform
+        targetType: end
+      id: 1772703443110-source-1772710467551-target
+      source: '1772703443110'
+      sourceHandle: source
+      target: '1772710467551'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1772702452513-source-1772703076815-target
+      source: '1772702452513'
+      sourceHandle: source
+      target: '1772703076815'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        sourceType: code
+        targetType: tool
+      id: 1772504194837-source-1773234349423-target
+      source: '1772504194837'
+      sourceHandle: source
+      target: '1773234349423'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        sourceType: tool
+        targetType: template-transform
+      id: 1773234349423-source-1772962364024-target
+      source: '1773234349423'
+      sourceHandle: source
+      target: '1772962364024'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        selected: false
+        title: ユーザー入力
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          default: ''
+          hint: ''
+          label: 電子取引ファイル（PDF・画像）
+          max_length: 5
+          options: []
+          placeholder: ''
+          required: true
+          type: file-list
+          variable: files
+        - default: ''
+          hint: ''
+          label: 取引日(YYYY-MM-DD形式)   未入力時はファイルから自動抽出
+          max_length: 100
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: trade_date
+        - hint: ''
+          label: '保存先フォルダパス（例: /電子取引/2026/03  ）'
+          max_length: 100
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: save_folder
+      height: 160
+      id: '1772502443849'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        error_handle_mode: continue-on-error
+        flatten_output: true
+        height: 272
+        is_parallel: false
+        iterator_input_type: array[file]
+        iterator_selector:
+        - '1772502443849'
+        - files
+        output_selector:
+        - '1772504194837'
+        - metadata_json
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1772502740789start
+        title: イテレーション（各ファイル処理ループ）
+        type: iteration
+        width: 1933.5109569596138
+      height: 272
+      id: '1772502740789'
+      position:
+        x: 383.8521473809272
+        y: 282
+      positionAbsolute:
+        x: 383.8521473809272
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1934
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1772502740789start
+      parentId: '1772502740789'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 407.8521473809272
+        y: 350
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        is_array_file: false
+        iteration_id: '1772502740789'
+        selected: false
+        title: テキスト抽出（ファイルテキスト化）
+        type: document-extractor
+        variable_selector:
+        - '1772502740789'
+        - item
+      height: 103
+      id: '1772503117574'
+      parentId: '1772502740789'
+      position:
+        x: 128
+        y: 68
+      positionAbsolute:
+        x: 511.8521473809272
+        y: 350
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1002
+    - data:
+        instruction: " ■ LLMへの指示（Instruction）:\n    以下のテキストから電子取引に関する情報を正確に抽出してください。\n\
+          \    ・取引日: 書類に記載された日付をYYYY-MM-DD形式で抽出\n    ・取引先名: 請求元・発行元の会社名（株式会社等を含む正式名称）\n\
+          \    ・金額: 税込の合計金額を数値のみで抽出（カンマ・円記号を除去）\n    ・取引内容: 品目・サービス内容を簡潔に要約（30文字以内）\n\
+          \    ・文書種別: 文書のタイプを「請求書/領収書/注文書/契約書/その他」から判定"
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o-mini
+          provider: langgenius/openai/openai
+        parameters:
+        - description: "取引日                         \n形式: YYYY-MM-DD             \
+            \   \n例: 2026-03-01"
+          name: trade_date
+          required: true
+          type: string
+        - description: '取引先名（正式名称）
+
+            例：株式会社山田商事'
+          name: partner_name
+          required: true
+          type: string
+        - description: '取引金額（税込み、円単位）
+
+            例：11000'
+          name: amount
+          required: true
+          type: number
+        - description: '取引内容の要約
+
+            例：Webサイト制作費用'
+          name: description
+          required: true
+          type: string
+        - description: '文書種別
+
+            選択肢：請求書/領収書/注文書/契約書/その他'
+          name: doc_type
+          required: true
+          type: string
+        query:
+        - '1772503117574'
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: パラメータ抽出
+        type: parameter-extractor
+        vision:
+          enabled: false
+      height: 87
+      id: '1772503678327'
+      parentId: '1772502740789'
+      position:
+        x: 429
+        y: 68
+      positionAbsolute:
+        x: 812.8521473809271
+        y: 350
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1002
+    - data:
+        code: "import json\nimport re\nfrom datetime import datetime\n\ndef main(trade_date:\
+          \ str, partner_name: str, amount: int,\n         doc_type: str, description:\
+          \ str, original_filename: str,\n         save_folder: str, input_trade_date:\
+          \ str) -> dict:\n\n    final_date = input_trade_date if input_trade_date\
+          \ else trade_date\n    date_compact = final_date.replace(\"-\", \"\")\n\n\
+          \    safe_partner = re.sub(r'[株式会社(有)(株)　\\s]', '', partner_name)\n    safe_partner\
+          \ = safe_partner[:10]\n\n    type_map = {\n        \"請求書\": \"INV\",\n \
+          \       \"領収書\": \"RCP\",\n        \"注文書\": \"ORD\",\n        \"契約書\": \"\
+          CTR\",\n        \"その他\": \"OTH\"\n    }\n    type_code = type_map.get(doc_type,\
+          \ \"OTH\")\n\n    ext = original_filename.rsplit(\".\", 1)[-1] if \".\"\
+          \ in original_filename else \"pdf\"\n\n    new_filename = f\"{date_compact}_{safe_partner}_{amount}_{type_code}.{ext}\"\
+          \n\n    safe_folder = save_folder if save_folder else \"\"\n    full_path\
+          \ = f\"{safe_folder.rstrip('/')}/{new_filename}\" if safe_folder else new_filename\n\
+          \n    metadata = {\n        \"original_filename\": original_filename,\n\
+          \        \"new_filename\": new_filename,\n        \"full_path\": full_path,\n\
+          \        \"trade_date\": final_date,\n        \"partner_name\": partner_name,\n\
+          \        \"amount\": amount,\n        \"doc_type\": doc_type,\n        \"\
+          description\": description,\n        \"processed_at\": datetime.now().strftime(\"\
+          %Y-%m-%d %H:%M:%S\"),\n        \"search_keys\": {\n            \"date_range\"\
+          : final_date,\n            \"partner\": partner_name,\n            \"amount_range\"\
+          : amount,\n            \"type\": doc_type\n        }\n    }\n\n    return\
+          \ {\n        \"new_filename\": new_filename,\n        \"full_path\": full_path,\n\
+          \        \"metadata_json\": json.dumps(metadata, ensure_ascii=False)\n \
+          \   }\n"
+        code_language: python3
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        outputs:
+          full_path:
+            children: null
+            type: string
+          metadata_json:
+            children: null
+            type: string
+          new_filename:
+            children: null
+            type: string
+        selected: false
+        title: コード実行（命名規則適用＋メタデータ生成）
+        type: code
+        variables:
+        - value_selector:
+          - '1772503678327'
+          - trade_date
+          value_type: string
+          variable: trade_date
+        - value_selector:
+          - '1772503678327'
+          - partner_name
+          value_type: string
+          variable: partner_name
+        - value_selector:
+          - '1772503678327'
+          - amount
+          value_type: number
+          variable: amount
+        - value_selector:
+          - '1772503678327'
+          - doc_type
+          value_type: string
+          variable: doc_type
+        - value_selector:
+          - '1772503678327'
+          - description
+          value_type: string
+          variable: description
+        - value_selector:
+          - '1772502740789'
+          - item
+          - name
+          value_type: file
+          variable: original_filename
+        - value_selector:
+          - '1772502443849'
+          - save_folder
+          value_type: string
+          variable: save_folder
+        - value_selector:
+          - '1772502443849'
+          - trade_date
+          value_type: string
+          variable: input_trade_date
+      height: 51
+      id: '1772504194837'
+      parentId: '1772502740789'
+      position:
+        x: 730
+        y: 68
+      positionAbsolute:
+        x: 1113.8521473809271
+        y: 350
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1002
+    - data:
+        dataset_ids:
+        - dW8TOFS9Zuv2Jp7Xx9TIRDCCrHcMmPgrJZv4ZiIaV3c7fY5du5T47cNsL2+cFOfa
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: weighted_score
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 0.7
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1772523024222'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 知識検索（電帳法保存要件検索）
+        type: knowledge-retrieval
+      height: 89
+      id: '1772521245321'
+      position:
+        x: 1729
+        y: 282
+      positionAbsolute:
+        x: 1729
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        selected: false
+        template: "    電子取引データの保存要件 真実性の要件 可視性の要件 検索性の要件\r\n    タイムスタンプ 訂正削除 ファイル命名規則\
+          \ 検索機能\r\n    請求書 領収書 注文書 契約書"
+        title: テンプレート（検索クエリ生成）
+        type: template-transform
+        variables: []
+      height: 51
+      id: '1772523024222'
+      position:
+        x: 1429
+        y: 282
+      positionAbsolute:
+        x: 1429
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1772521245321'
+          - result
+        model:
+          completion_params:
+            max_tokens: 4101
+            temperature: 0.2
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 2d92a45d-fefc-40d9-b388-e2acae79eeec
+          role: system
+          text: "あなたは電子帳簿保存法の専門家です。\n電子取引データの保存要件への適合性を厳密にチェックしてください。\n\n電帳法保存要件検索\n\
+            {{#context#}}\n\n以下の3つの観点で各ファイルを評価し、JSON形式で結果を返してください。\n\n【評価観点】\n1. 真実性の要件\n\
+            2. 可視性の要件\n3. 検索性の要件\n\n※注意：出力トークン数を抑えるため、個別のチェック項目の詳細（checksリスト）は出力しないでください。最終的な判定結果と問題点のみを出力してください。\n\
+            \n【出力JSON形式】\n{\n  \"files\": [\n    {\n      \"filename\": \"元ファイル名\"\
+            ,\n      \"overall\": \"適合/不備あり/要確認\",\n      \"issues\": [\"不備内容の短いリスト(適合の場合は空のリスト\
+            \ [])\"],\n      \"recommendations\": [\"推奨対応のテキスト(適合の場合は空のリスト [])\"]\n\
+            \    }\n  ]\n}\n"
+        - id: 7d70c654-9049-44f6-aee0-b890456c4913
+          role: user
+          text: "    以下の電子取引ファイルについて、電帳法保存要件のチェックを実施してください。\n\n    【処理済みファイル情報】\n\
+            \    {{#1772502740789.output#}}\n\n     【指定保存先】\n    {{#1772502443849.save_folder#}}\n\
+            \n    各ファイルについて、真実性・可視性・検索性の全項目をチェックし、\n    不備がある場合は具体的な修正手順も含めて報告してください。"
+        selected: false
+        title: LLM（ 保存要件充足判定）
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1772701350979'
+      position:
+        x: 2042.0965291375214
+        y: 282
+      positionAbsolute:
+        x: 2042.0965291375214
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        code: "import json\nimport re\n\ndef main(file_results: list, check_result:\
+          \ str) -> dict:\n    def clean_json(text):\n        if not text or not text.strip():\n\
+          \            return \"{}\"\n        text = text.strip()\n        text =\
+          \ re.sub(r'^```json\\s*', '', text)\n        text = re.sub(r'^```\\s*',\
+          \ '', text)\n        text = re.sub(r'\\s*```$', '', text)\n        return\
+          \ text.strip()\n\n    files = []\n    for f in file_results:\n        if\
+          \ isinstance(f, str) and f.strip():\n            try:\n                files.append(json.loads(clean_json(f)))\n\
+          \            except json.JSONDecodeError:\n                files.append({\"\
+          original_filename\": \"parse_error\", \"error\": f[:100]})\n        elif\
+          \ isinstance(f, dict):\n            files.append(f)\n\n    checks = {\"\
+          files\": []}\n    if isinstance(check_result, str) and check_result.strip():\n\
+          \        try:\n            checks = json.loads(clean_json(check_result))\n\
+          \        except json.JSONDecodeError:\n            checks = {\"files\":\
+          \ [], \"parse_error\": check_result[:200]}\n    elif isinstance(check_result,\
+          \ dict):\n        checks = check_result\n\n    total_files = len(files)\n\
+          \    check_files = checks.get(\"files\", [])\n\n    ok_count = sum(1 for\
+          \ f in check_files if f.get(\"overall\") == \"適合\")\n    ng_count = sum(1\
+          \ for f in check_files if f.get(\"overall\") == \"不備あり\")\n    pending_count\
+          \ = total_files - ok_count - ng_count\n    compliance_rate = round((ok_count\
+          \ / total_files) * 100, 1) if total_files > 0 else 0\n\n    ng_files = []\n\
+          \    for f in check_files:\n        if f.get(\"overall\") != \"適合\":\n \
+          \           ng_files.append({\n                \"filename\": f.get(\"filename\"\
+          , \"\"),\n                \"status\": f.get(\"overall\", \"\"),\n      \
+          \          \"issues\": f.get(\"issues\", []),\n                \"recommendations\"\
+          : f.get(\"recommendations\", [])\n            })\n\n    has_issues = len(ng_files)\
+          \ > 0\n\n    csv_header = \"No,元ファイル名,新ファイル名,取引日,取引先,金額,種別,判定\"\n    csv_rows\
+          \ = [csv_header]\n    for i, meta in enumerate(files):\n        status =\
+          \ \"適合\"\n        for cf in check_files:\n            if cf.get(\"filename\"\
+          ) == meta.get(\"original_filename\"):\n                status = cf.get(\"\
+          overall\", \"適合\")\n                break\n        row = f'{i+1},{meta.get(\"\
+          original_filename\",\"\")},{meta.get(\"new_filename\",\"\")},{meta.get(\"\
+          trade_date\",\"\")},{meta.get(\"partner_name\",\"\")},{meta.get(\"amount\"\
+          ,\"\")},{meta.get(\"doc_type\",\"\")},{status}'\n        csv_rows.append(row)\n\
+          \    \n    csv_text = \"\\n\".join(csv_rows)\n\n    summary = {\n      \
+          \  \"total_files\": total_files,\n        \"ok_count\": ok_count,\n    \
+          \    \"ng_count\": ng_count,\n        \"pending_count\": pending_count,\n\
+          \        \"compliance_rate\": compliance_rate,\n        \"has_issues\":\
+          \ has_issues\n    }\n\n    slack_color = \"danger\" if has_issues else \"\
+          good\"\n    slack_text_prefix = \"<!channel> ⚠️ 不備ファイルあり\" if has_issues\
+          \ else \"✅ すべて適合\"\n\n    return {\n        \"summary\": summary,\n    \
+          \    \"ng_files\": ng_files,\n        \"csv_text\": csv_text,\n        \"\
+          has_issues\": \"true\" if has_issues else \"false\",\n        \"slack_color\"\
+          : slack_color,\n        \"slack_text_prefix\": slack_text_prefix,\n    \
+          \    \"total_files\": total_files,\n        \"compliance_rate\": compliance_rate\n\
+          \    }\n"
+        code_language: python3
+        outputs:
+          compliance_rate:
+            children: null
+            type: number
+          csv_text:
+            children: null
+            type: string
+          has_issues:
+            children: null
+            type: string
+          ng_files:
+            children: null
+            type: array[object]
+          slack_color:
+            children: null
+            type: string
+          slack_text_prefix:
+            children: null
+            type: string
+          summary:
+            children: null
+            type: object
+          total_files:
+            children: null
+            type: number
+        selected: false
+        title: コード実行 2（結果集計＋メタデータ一覧生成）
+        type: code
+        variables:
+        - value_selector:
+          - '1772502740789'
+          - output
+          value_type: array[string]
+          variable: file_results
+        - value_selector:
+          - '1772701350979'
+          - text
+          value_type: string
+          variable: check_result
+      height: 51
+      id: '1772702452513'
+      position:
+        x: 2331
+        y: 282
+      positionAbsolute:
+        x: 2331
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 449ec7ad-10a7-42e3-b4f9-1770408ca317
+            value: '"true"'
+            varType: string
+            variable_selector:
+            - '1772702452513'
+            - has_issues
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: IF/ELSE
+        type: if-else
+      height: 123
+      id: '1772703076815'
+      position:
+        x: 2783.1498618808187
+        y: 282
+      positionAbsolute:
+        x: 2783.1498618808187
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        selected: false
+        template: "⚠️ 電子帳簿保存法 チェック結果【不備あり】\r\n\r\n    ══════════════════════════════════════\r\
+          \n    \U0001F4CA 処理サマリー\r\n    ══════════════════════════════════════\r\n\
+          \    処理ファイル数: {{summary.total_files}}件\r\n    適合: {{summary.ok_count}}件\
+          \ ✅\r\n    不備あり: {{summary.ng_count}}件 ❌\r\n    要確認: {{summary.pending_count}}件\
+          \ ⚠️\r\n    適合率: {{summary.compliance_rate}}%\r\n\r\n    ══════════════════════════════════════\r\
+          \n    ❌ 不備ファイル一覧\r\n    ══════════════════════════════════════\r\n    {%\
+          \ for file in ng_files %}\r\n    ■ {{file.filename}}\r\n      判定: {{file.status}}\r\
+          \n      不備内容:\r\n      {% for issue in file.issues %}\r\n      ・{{issue}}\r\
+          \n      {% endfor %}\r\n      推奨対応:\r\n      {% for rec in file.recommendations\
+          \ %}\r\n      → {{rec}}\r\n      {% endfor %}\r\n    ---\r\n    {% endfor\
+          \ %}\r\n\r\n    ══════════════════════════════════════\r\n    \U0001F4CB\
+          \ メタデータ一覧表\r\n    ══════════════════════════════════════\r\n    {{csv_text}}\r\
+          \n\r\n    ══════════════════════════════════════\r\n    ⏰ 注意事項\r\n    ══════════════════════════════════════\r\
+          \n    ・電子取引データの保存は法的義務です\r\n    ・不備ファイルは速やかに修正してください\r\n    ・修正後は改めてチェックを実行することを推奨します\r\
+          \n    ・タイムスタンプの付与が必要な場合は早急に対応してください\r\n"
+        title: テンプレート 2
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1772702452513'
+          - summary
+          value_type: object
+          variable: summary
+        - value_selector:
+          - '1772702452513'
+          - ng_files
+          value_type: array[object]
+          variable: ng_files
+        - value_selector:
+          - '1772702452513'
+          - csv_text
+          value_type: string
+          variable: csv_text
+      height: 51
+      id: '1772703193887'
+      position:
+        x: 3233
+        y: 282
+      positionAbsolute:
+        x: 3233
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        selected: false
+        template: "✅ 電子帳簿保存法 チェック結果【全件適合】\r\n\r\n    ══════════════════════════════════════\r\
+          \n    \U0001F4CA 処理サマリー\r\n    ══════════════════════════════════════\r\n\
+          \    処理ファイル数: {{summary.total_files}}件\r\n    全件適合: {{summary.ok_count}}件\
+          \ ✅\r\n    適合率: 100%\r\n\r\n    すべてのファイルが電子帳簿保存法の保存要件を\r\n    充足しています。\r\
+          \n\r\n    ══════════════════════════════════════\r\n    \U0001F4CB ファイル名候補一覧\r\
+          \n    ══════════════════════════════════════\r\n    {{csv_text}}\r\n\r\n\
+          \    ══════════════════════════════════════\r\n    ✅ チェック完了項目\r\n    ══════════════════════════════════════\r\
+          \n    ☑ 真実性の要件: 全件OK\r\n    ☑ 可視性の要件: 全件OK\r\n    ☑ 検索性の要件: 全件OK\r\n   \
+          \   ・取引日での検索: 対応済\r\n      ・取引金額での検索: 対応済\r\n      ・取引先名での検索: 対応済\r\n\r\n\
+          \    上記ファイル名で保存することを推奨します。"
+        title: テンプレート 3
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1772702452513'
+          - summary
+          value_type: object
+          variable: summary
+        - value_selector:
+          - '1772702452513'
+          - csv_text
+          value_type: string
+          variable: csv_text
+      height: 51
+      id: '1772703443110'
+      position:
+        x: 3233
+        y: 372
+      positionAbsolute:
+        x: 3233
+        y: 372
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        outputs:
+        - value_selector:
+          - '1772703193887'
+          - output
+          value_type: string
+          variable: report
+        - value_selector:
+          - '1772702452513'
+          - csv_text
+          value_type: string
+          variable: file_list_csv
+        - value_selector:
+          - '1772702452513'
+          - summary
+          value_type: string
+          variable: compliance_rate
+        selected: false
+        title: 出力
+        type: end
+      height: 139
+      id: '1772710467551'
+      position:
+        x: 3629.6418397609023
+        y: 272.12701152696644
+      positionAbsolute:
+        x: 3629.6418397609023
+        y: 272.12701152696644
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1772502740789'
+        selected: false
+        template: '{{ metadata_json_ }}'
+        title: テンプレート 4
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1772504194837'
+          - metadata_json
+          value_type: string
+          variable: metadata_json_
+      height: 51
+      id: '1772962364024'
+      parentId: '1772502740789'
+      position:
+        x: 1676.5109569596138
+        y: 68
+      positionAbsolute:
+        x: 2060.363104340541
+        y: 350
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        is_team_authorization: true
+        iteration_id: '1772502740789'
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: File to upload to Google Drive
+            ja_JP: File to upload to Google Drive
+            pt_BR: Arquivo para enviar ao Google Drive
+            zh_Hans: 要上传到 Google Drive 的文件
+          label:
+            en_US: File
+            ja_JP: File
+            pt_BR: Arquivo
+            zh_Hans: 文件
+          llm_description: File to upload to Google Drive
+          max: null
+          min: null
+          name: file
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: file
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Name of the file to create (if empty, will use the original filename)
+            ja_JP: Name of the file to create (if empty, will use the original filename)
+            pt_BR: Nome do arquivo a ser criado (se vazio, usará o nome do arquivo
+              original)
+            zh_Hans: 要创建的文件名称（如果为空，将使用原始文件名）
+          label:
+            en_US: File name
+            ja_JP: File name
+            pt_BR: Nome do arquivo
+            zh_Hans: 文件名称
+          llm_description: Name of the file to create. If not provided, the original
+            filename will be used.
+          max: null
+          min: null
+          name: name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Name of the folder to save the file to. If it doesn't exist, it
+              will be created.
+            ja_JP: Name of the folder to save the file to. If it doesn't exist, it
+              will be created.
+            pt_BR: Nome da pasta para salvar o arquivo. Se não existir, será criada.
+            zh_Hans: 保存文件的文件夹名称。如果文件夹不存在，将会被创建。
+          label:
+            en_US: Folder name
+            ja_JP: Folder name
+            pt_BR: Nome da pasta
+            zh_Hans: 文件夹名称
+          llm_description: Name of the folder to save the file to. If the folder doesn't
+            exist, it will be created automatically. You can use this parameter instead
+            of parent_id for easier folder selection.
+          max: null
+          min: null
+          name: folder_name
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: root
+          form: llm
+          human_description:
+            en_US: ID of the parent folder where the new file will be created (default
+              is root)
+            ja_JP: ID of the parent folder where the new file will be created (default
+              is root)
+            pt_BR: ID da pasta pai onde o novo arquivo será criado (o padrão é a pasta
+              raiz)
+            zh_Hans: 新文件将在其中创建的父文件夹的ID（默认为根文件夹）
+          label:
+            en_US: Parent folder ID
+            ja_JP: Parent folder ID
+            pt_BR: ID da pasta pai
+            zh_Hans: 父文件夹ID
+          llm_description: ID of the parent folder where the new file will be created.
+            Use 'root' for the root folder. Note - if folder_name is provided, it
+            will take precedence over parent_id.
+          max: null
+          min: null
+          name: parent_id
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          file: ''
+          folder_name: ''
+          name: ''
+          parent_id: ''
+        plugin_id: yoshiki-0428/google_drive
+        plugin_unique_identifier: yoshiki-0428/google_drive:0.1.0@3be894ee7a15878c2c00c3728f901d8d63c56b901b7494c5a2a8fc0649566d52
+        provider_icon: /console/api/workspaces/current/plugin/icon?tenant_id=917a5f57-46cd-4ef3-b769-328394acc9ff&filename=510a73bf9ced910ce5f58e8557f1f0e4772867a47173e8490d05ac4f4d7b1886.svg
+        provider_id: yoshiki-0428/google_drive/google_drive
+        provider_name: yoshiki-0428/google_drive/google_drive
+        provider_type: builtin
+        selected: false
+        title: Create Google Drive file
+        tool_configurations: {}
+        tool_description: Create a new file in Google Drive
+        tool_label: Create Google Drive file
+        tool_name: google-drive-create-file
+        tool_node_version: '2'
+        tool_parameters:
+          file:
+            type: variable
+            value:
+            - '1772502740789'
+            - item
+          folder_name:
+            type: mixed
+            value: null
+          name:
+            type: mixed
+            value: '{{#1772504194837.new_filename#}}'
+          parent_id:
+            type: mixed
+            value: 1XM1yk93_-wQbwrzpXan7SW7QLVnDDKLB
+        type: tool
+      height: 51
+      id: '1773234349423'
+      parentId: '1772502740789'
+      position:
+        x: 1031
+        y: 68
+      positionAbsolute:
+        x: 1414.8521473809271
+        y: 350
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1002
+    viewport:
+      x: -189.00315833635113
+      y: 54.227823087540855
+      zoom: 0.45011715035396455
+  rag_pipeline_variables: []
